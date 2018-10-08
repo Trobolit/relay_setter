@@ -41,7 +41,7 @@ void setup(void)
   
   // Initialize relay pins
   for(int i=0;i<number_of_relays;i++){
-    pinMode(i,OUTPUT);
+    pinMode(relay_pins[i],OUTPUT);
   }
   // Initialize serial
   Serial.begin(BAUDRATE);
@@ -96,6 +96,7 @@ void loop(void)
           break;
         }
       }
+      blinks(3, 50);
       updateAllRelays();
 
   } else {
@@ -117,12 +118,14 @@ void blinks(int n, int d) {
 }
 
 void changeAllRelayStates(bool state){
+  //blinks(1, 300);
   for(int i=0;i<number_of_relays;i++){
     relay_states[i]=state;
   }
 }
 
 void updateAllRelays() {
+  ///blinks(3, 50);
   for(int i=0;i<number_of_relays;i++){
     if(relay_states[i])
       digitalWrite(relay_pins[i], HIGH);
